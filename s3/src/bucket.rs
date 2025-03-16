@@ -2041,6 +2041,7 @@ impl Bucket {
                 max_keys,
             }
         };
+        println!("command: {:?}", command);
         let request = RequestImpl::new(self, "/", command).await?;
         let response_data = request.response_data(false).await?;
         let text = std::str::from_utf8(response_data.as_slice()).unwrap();
