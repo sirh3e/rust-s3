@@ -2043,6 +2043,9 @@ impl Bucket {
         };
         let request = RequestImpl::new(self, "/", command).await?;
         let response_data = request.response_data(false).await?;
+        let text = std::str::from_utf8(response_data.as_slice()).unwrap();
+        println!("{}", text);
+
         let list_bucket_result = quick_xml::de::from_reader(response_data.as_slice())?;
 
         Ok((list_bucket_result, response_data.status_code()))
